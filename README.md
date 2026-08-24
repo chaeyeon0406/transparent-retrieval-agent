@@ -30,19 +30,20 @@ To obtain access:
 1. Request access at [adni.loni.usc.edu/data-samples/access-data](https://adni.loni.usc.edu/data-samples/access-data/) (typically ~1 week for approval).
 2. Download T1-weighted MRI and associated clinical variables (Age, MMSE, CDR-Global) for the ADNI1 and ADNI2 cohorts.
 3. Extract the 75-dimensional fused feature vector (25 DCT + 21 DWT + 26 LBP image-texture features, plus 3 clinical variables) as described in Sec. 2.1 of the paper, and format as `img_0`...`img_71`, `AGE`, `MMSCORE`, `CDGLOBAL`, `RID`, `Target` columns.
+4. Place the ADNI1 feature file at `features/full_features.csv`, and the ADNI2 feature file at `adni2_validation/features/full_features.csv`.
 
 ## Repository structure
 
 | Script | Produces |
 |---|---|
-| `svd_svm.py` | Grid search over SVD dimensionality and SVM hyperparameters (C, gamma); fusion classification accuracy (Sec. 3) |
-| `relevance_feedback.py`, `relevance_feedback_adni2.py` | Retrieval precision before/after feedback, Table 1 |
+| `svd_svm.py` | Grid search over SVD dimensionality and SVM hyperparameters (C, gamma); fusion classification accuracy (Sec. 3). Saves `features/best_model.joblib`. |
+| `relevance_feedback_adni1.py`, `relevance_feedback_adni2.py` | Retrieval precision before/after feedback, Table 1 |
 | `trajectory_adni1.py`, `trajectory_adni2.py` | Feedback-round convergence, Figure 1(a) |
 | `noise_adni1.py`, `noise_adni2.py` | Noise-robustness sweep, Figure 1(b) |
 | `exhaustive_adni1.py`, `exhaustive_adni2.py` | Exhaustive re-evaluation of all misclassified AD queries (n=127, n=187), Sec. 4 |
 | `stats_delta_analysis.py` | Mann-Whitney U test and bootstrap CI on per-query feedback gains, Sec. 4 |
 | `make_figure1.py` | Renders Figure 1 from the trajectory/noise results above |
-| `best_model.joblib` | Saved grid-search hyperparameters (no patient data; parameter values only) |
+| `features/best_model.joblib` | Saved grid-search hyperparameters (no patient data; parameter values only) |
 
 ## Reproducing the paper's results
 
@@ -51,7 +52,7 @@ To obtain access:
 python3 svd_svm.py
 
 # 2. Retrieval precision (Table 1)
-python3 relevance_feedback.py
+python3 relevance_feedback_adni1.py
 python3 relevance_feedback_adni2.py
 
 # 3. Feedback-round convergence (Figure 1a)
