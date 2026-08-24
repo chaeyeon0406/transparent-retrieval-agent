@@ -27,7 +27,7 @@ This project uses the ADNI (Alzheimer's Disease Neuroimaging Initiative) dataset
 
 To obtain access:
 
-1. Request access at [adni.loni.usc.edu/data-samples/access-data](https://adni.loni.usc.edu/data-samples/access-data/) (typically ~1 week for approval).
+1. Request access at [adni.loni.usc.edu/data-samples/adni-data](https://adni.loni.usc.edu/data-samples/adni-data/) (Data Use Agreement + online application via the LONI Image and Data Archive; review typically takes ~2 weeks).
 2. Download T1-weighted MRI and associated clinical variables (Age, MMSE, CDR-Global) for the ADNI1 and ADNI2 cohorts.
 3. Extract the 75-dimensional fused feature vector (25 DCT + 21 DWT + 26 LBP image-texture features, plus 3 clinical variables) as described in Sec. 2.1 of the paper, and format as `img_0`...`img_71`, `AGE`, `MMSCORE`, `CDGLOBAL`, `RID`, `Target` columns.
 4. Place the ADNI1 feature file at `features/full_features.csv`, and the ADNI2 feature file at `adni2_validation/features/full_features.csv`.
